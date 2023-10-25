@@ -19,20 +19,17 @@
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url_for('public.index') }}">inicio</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
         {% if current_user.is_anonymous %}
             <span class="navbar-text"><a href="{{ url_for('auth.login') }}">conectarse</a></span>
-            <li> | </li>
+            <span class="navbar-text"> | </span>
             <span class="navbar-text"><a href="{{ url_for('auth.show_signup_form') }}">Registrar</a></span>
         {% else %}
-            <li>{{ current_user.name }}</li>
+            <span class="navbar-text">{{ current_user.name }}</span>
             {% if current_user.is_admin %}
-            <li> | </li>
+            <span class="navbar-text"> | </span>
             <span class="navbar-text"><a href="{{ url_for('admin.index') }}">administrador</a></span>
             {% endif %}
-            <li> | </li>
+            <span class="navbar-text"> | </span>
             <span class="navbar-text"><a href="{{ url_for('auth.logout') }}">desconectarse</a></span>
        {% endif %}
     </ul>
