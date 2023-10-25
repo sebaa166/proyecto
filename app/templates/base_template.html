@@ -22,6 +22,20 @@
         <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
         </li>
+        {% if current_user.is_anonymous %}
+            <li><a href="{{ url_for('auth.login') }}">conectarse</a></li>
+            <span class="navbar-text"> | <span>
+            <li><a href="{{ url_for('auth.show_signup_form') }}">Registrar</a></li>
+        {% else %}
+            <li>{{ current_user.name }}</li>
+            {% if current_user.is_admin %}
+              <span class="navbar-text"> | <span>
+                <li><a href="{{ url_for('admin.index') }}">administrador</a></li>
+            {% endif %}
+            <span class="navbar-text"> | <span>
+            <li><a href="{{ url_for('auth.logout') }}">desconectarse</a></li>
+       {% endif %}
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Dropdown
