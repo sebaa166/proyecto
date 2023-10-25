@@ -23,33 +23,18 @@
             <a class="nav-link" href="#">Link</a>
         </li>
         {% if current_user.is_anonymous %}
-            <li><a href="{{ url_for('auth.login') }}">conectarse</a></li>
-            <span class="navbar-text"> | <span>
+            <a href="{{ url_for('auth.login') }}">conectarse</a></li>
+            <li> | </li>
             <li><a href="{{ url_for('auth.show_signup_form') }}">Registrar</a></li>
         {% else %}
             <li>{{ current_user.name }}</li>
             {% if current_user.is_admin %}
-              <span class="navbar-text"> | <span>
+            <li> | </li>
                 <li><a href="{{ url_for('admin.index') }}">administrador</a></li>
             {% endif %}
-            <span class="navbar-text"> | <span>
+            <li> | </li>
             <li><a href="{{ url_for('auth.logout') }}">desconectarse</a></li>
        {% endif %}
-
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-            </a>
-            <ul class="dropdown-menu">
-               <li><a class="dropdown-item" href="#">Action</a></li>
-               <li><a class="dropdown-item" href="#">Another action</a></li>
-               <li><hr class="dropdown-divider"></li>
-               <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-         </li>
     </ul>
     <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
