@@ -30,12 +30,10 @@
                     {% else %}
                             <span class="navbar-text">{{ current_user.name }} </span>
                         {% if current_user.is_admin %}
-                            <span class="navbar-text"> | </span>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url_for('admin.index') }}">Administrador</a>
                             </li>
                         {% endif %}
-                        <span class="navbar-text"> | </span>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('auth.logout') }}">Salir</a>
                         </li>
