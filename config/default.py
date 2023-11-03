@@ -7,7 +7,7 @@ FECHA DE CREACIÓN: 08/07/2019
 """
 
 from os.path import abspath, dirname, join
-
+import os
 
 # Define the application directory
 BASE_DIR = dirname(dirname(abspath(__file__)))
@@ -29,7 +29,7 @@ APP_ENV_PRODUCTION = 'production'
 APP_ENV = ''
 
 
-MAIL_SERVER = 'tu servidor smtp'
+MAIL_SERVER = os.getenv('MAIL_SERVER_ENV')
 MAIL_PORT = 587
 MAIL_USERNAME = 'tu correo'
 MAIL_PASSWORD = 'tu contraseña'
