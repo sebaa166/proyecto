@@ -4,6 +4,8 @@
 
 {% block content %}
     {% if error %}
+<div class="col-lg-4 col-md-2 col-1"></div>
+<div class="col-lg-4 col-md-8 col-10 mt-3">
         <p style="color: red;"><strong>Error:</strong> {{ error }}
     {% endif %}
     <form action="" method="post" novalidate>
@@ -33,4 +35,6 @@
             {{ form.submit() }}
         </div>
     </form>
+</div>
+<div class="col-lg-4 col-md-2 col-1"></div>
 {% endblock %}
