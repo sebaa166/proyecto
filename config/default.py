@@ -31,8 +31,8 @@ APP_ENV = ''
 
 MAIL_SERVER = os.getenv('MAIL_SERVER_ENV')
 MAIL_PORT = 587
-MAIL_USERNAME = 'tu correo'
-MAIL_PASSWORD = 'tu contraseña'
+MAIL_USERNAME = os.getenv('MAIL_USERNAME_ENV')
+MAIL_PASSWORD = os.getenv('MAIL_PASSWORD_ENV')
 DONT_REPLY_FROM_EMAIL = 'dirección from'
 ADMINS = ('juanjo@j2logo.com', )
 MAIL_USE_TLS = True
