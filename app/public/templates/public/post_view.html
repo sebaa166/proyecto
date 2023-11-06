@@ -1,9 +1,12 @@
 {% extends "base_template.html" %}
 
-{% block title %}{{ post.title }}{% endblock %}
+<h5 class="card-title">{% block title %}{{ post.title }}{% endblock %}</h5>
+
 
 {% block content %}
-    <h1>{{ post.title }}</h1>
+<a class="nav-link disabled" aria-disabled="true">{{ post.title }}</a> 
+        
+ 
     <div>
         <span class="blogDate">{{ post.created|datetime('full') }}</span>
     </div>
@@ -14,8 +17,11 @@
     {% endif %}
     {{ post.content }}
 
-    <h2>Comentarios</h2>
+    <a class="nav-link disabled" aria-disabled="true">Comentarios</a>
+            
+
     {% if current_user.is_authenticated %}
+    
     <div>
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
