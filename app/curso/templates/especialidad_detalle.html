@@ -1,0 +1,48 @@
+{% extends "base_cursos.html" %}
+
+{% block title %}{{ especialidad.nombre }}{% endblock %}
+
+{% block curso %}
+    <h1>{{ especialidad.nombre }}</h1>
+    <div>
+        <span class="blogDate">{{ especialidad.created|datetime('full') }}</span>
+    </div>
+    <p>Codigo: {{ especialidad.codigo }} </p>
+
+    <p>Resolucion: {{ especialidad.resolucion}} </p>
+    <br>
+    <h3>Modulos de la especialidad: </h3>
+    {% if current_user.is_admin %}
+        <a href="{{ url_for('curso.modulo_form', especialidad_id=especialidad.id)}}">Nuevo Modulo</a>
+    {% endif %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Horas Catedra</th>
+            <th scope="col">Horas Reloj</th>
+            {% if current_user.is_admin %}
+            <th scope="col">Acciones</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+        {% for modulo in modulos %}
+            <tr>
+                <th scope="row"> {{ modulo.codigo }} </th>
+                    <td> {{ modulo.nombre }} </td>
+                    <td> {{ modulo.hcat }} </td>
+                    <td> {{ modulo.hreloj }} </td>
+                    {% if current_user.is_admin %}
+                    <td> 
+                        <a href="{{ url_for('curso.update_modulo_form', modulo_id=modulo.id, especialidad_id=modulo.especialidad_id)}}">Modificar</a>
+                        <span>|</span>
+                        <a href="{{ url_for('curso.delete_modulo', modulo_id=modulo.id, especialidad_id=modulo.especialidad_id)}}">Eliminar</a>
+                    </td>
+                    {% endif %}
+            </tr>  
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

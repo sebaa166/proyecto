@@ -11,9 +11,11 @@ from logging.handlers import SMTPHandler
 
 from flask import Flask, render_template
 from flask_login import LoginManager
+from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_mail import Mail
+
+
 from app.common.filters import format_datetime
 
 
@@ -37,12 +39,13 @@ def create_app(settings_module):
 
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
-
+    
     db.init_app(app)
     migrate.init_app(app, db)
     mail.init_app(app)
-    register_filters(app)
 
+    # Registro de los filtros
+    register_filters(app)
 
     # Registro de los Blueprints
     from .auth import auth_bp
@@ -53,6 +56,9 @@ def create_app(settings_module):
 
     from .public import public_bp
     app.register_blueprint(public_bp)
+
+    from app.curso import curso_bp
+    app.register_blueprint(curso_bp)
 
     # Custom error handlers
     register_error_handlers(app)

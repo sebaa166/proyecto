@@ -2,12 +2,14 @@
 
 {% block content %}
 
-
-<a>{% block title %}Tutorial Flask: Miniblog{% endblock %}</a>
+<div class="container text-center">
+<h1>{% block title %}Tutorial Flask: Miniblog{% endblock %}</h1>
   <ul class="nav flex-column"> {% for post in post_pagination.items %}
         
-        <p><a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ url_for('public.show_post', slug=post.title_slug) }}">{{ post.title }}</a></p><span class="postCreated">({{ post.created|datetime }})</span>
-   
+        <h3><a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{{ url_for('public.show_post', slug=post.title_slug) }}">{{ post.title }}</a></h3><span class="postCreated">({{ post.created|datetime }})</span>
+        <p class="placeholder-glow">
+          <span class="placeholder col-12"></span>
+        </p>
     {% else %}
         <li>No hay entradas</li>
     {% endfor %}
@@ -32,5 +34,5 @@
         {%- endfor %}
       </ul>
   </nav>
-
+</div>
 {% endblock %}

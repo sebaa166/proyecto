@@ -1,0 +1,38 @@
+{% extends "base_cursos.html" %}
+
+{% block title %}Cursos{% endblock %}
+
+{% block curso %}
+    <ul>
+    {% for curso in cursos_pagination.items %}
+        <li>
+            <a href="{{ url_for('curso.detalles_curso', id=curso.id) }}">
+             <b> {{ curso.numero }} </b> - {{ curso.especialidad_curso.nombre }} 
+            </a>
+            {% if current_user.is_admin %}
+            <a href="{{ url_for('curso.update_curso_form', curso_id=curso.id)}}">Modificar</a>
+            <span> | </span>
+            <form action="{{ url_for('curso.delete_curso', curso_id=curso.id) }}" method="post" novalidate>
+                <input type="submit" value="Eliminar" />
+            </form>
+            {% endif %}
+        </li>
+    {% else %}
+        <li>No hay cursos</li>
+    {% endfor %}
+    </ul>
+
+    <div class=pagination>
+        {%- for page in cursos_pagination.iter_pages() %}
+            {% if page %}
+                {% if page != cursos_pagination.page %}
+                    <a href="{{ url_for('curso.index', page=page) }}">{{ page }}</a>
+                {% else %}
+                    <strong>{{ page }}</strong>
+                {% endif %}
+            {% else %}
+                <span class=ellipsis>…</span>
+            {% endif %}
+        {%- endfor %}
+    </div>
+{% endblock %}

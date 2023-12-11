@@ -1,0 +1,101 @@
+{% extends "base_cursos.html" %}
+
+{% block title %}
+    {% if form.nombre.data %}
+        {{ form.nombre.data }}
+    {% else %}
+        Nueva Especialidad
+    {% endif %}
+{% endblock %}
+
+{% block curso %}
+    <form action="" method="post" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.familia.label(class_="form-label") }}
+            {{ form.familia(class_="form-control") }}<br>
+            {% for error in form.familia.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.codigo.label(class_="form-label") }}
+            {{ form.codigo(class_="form-control") }}<br>
+            {% for error in form.codigo.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.nombre.label(class_="form-label") }}
+            {{ form.nombre(class_="form-control") }}<br>
+            {% for error in form.nombre.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.nivel.label(class_="form-label") }}
+            {{ form.nivel(class="form-check") }}<br>
+            {% for error in form.nivel.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.cert.label(class_="form-label") }}
+            {{ form.cert(class_="form-control") }}<br>
+            {% for error in form.cert.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.resolucion.label(class_="form-label") }}
+            {{ form.resolucion(class_="form-control") }}<br>
+            {% for error in form.resolucion.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.hcat.label(class_="form-label") }}
+            {{ form.hcat(class_="form-control") }}<br>
+            {% for error in form.hcat.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.hreloj.label(class_="form-label") }}
+            {{ form.hreloj(class_="form-control") }}<br>
+            {% for error in form.hreloj.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.requisitos.label(class_="form-label") }}
+            {{ form.requisitos(class_="form-control") }}<br>
+            {% for error in form.requisitos.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.diseno.label(class_="form-label") }}
+            {{ form.diseno(class_="form-control") }}<br>
+            {% for error in form.diseno.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.reemplaza.label(class_="form-label") }}
+            {{ form.reemplaza(class_="form-control") }}<br>
+            {% for error in form.reemplaza.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+    <br>
+    {% if especialidad %}
+    <form action="{{ url_for('curso.delete_especialidad', especialidad_id=especialidad.id) }}" method="post" novalidate>
+        <input type="submit" class="btn btn-primary mb-3" value="Eliminar" />
+    </form>
+    {% endif %}
+{% endblock %}

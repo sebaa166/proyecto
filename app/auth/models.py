@@ -22,14 +22,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-    
-    @staticmethod
-    def get_all():
-        return User.query.all()
-
     def __init__(self, name, email):
         self.name = name
         self.email = email
@@ -48,6 +40,10 @@ class User(db.Model, UserMixin):
             db.session.add(self)
         db.session.commit()
 
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
     @staticmethod
     def get_by_id(id):
         return User.query.get(id)
@@ -55,3 +51,7 @@ class User(db.Model, UserMixin):
     @staticmethod
     def get_by_email(email):
         return User.query.filter_by(email=email).first()
+
+    @staticmethod
+    def get_all():
+        return User.query.all()

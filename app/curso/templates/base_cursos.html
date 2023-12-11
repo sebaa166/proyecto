@@ -1,0 +1,44 @@
+{% extends "base_template.html" %}
+
+{% set manana = 'mañana' %}
+{% set tarde = 'tarde' %}
+{% set vespertino = 'vespertino' %}
+
+{% block title %}
+Cursos
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('curso.index') }}">Cursos</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('curso.curso_form') }}">Nuevo Curso</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('curso.buscar_turno', turno=manana) }}">Mañana</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('curso.buscar_turno', turno=tarde) }}">Tarde</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('curso.buscar_turno', turno=vespertino) }}">Vespertino</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('curso.especialidades') }}">Especialidades</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('curso.especialidad_form') }}">Nueva Especialidad</a>
+            </li>
+        </ul>
+      <form class="d-flex" role="search" method="get" action="{{ url_for('curso.buscar_especialidad') }}">
+        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="especialidad">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+    </div>
+</nav>
+<div>
+    {% block curso %}{% endblock %}
+</div>
+{% endblock %}

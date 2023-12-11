@@ -1,14 +1,21 @@
+"""
 
+AUTOR: Juanjo
 
-from flask import render_template, redirect, url_for, request, current_app
+FECHA DE CREACIÓN: 24/05/2019
+
+"""
+
+from flask import (render_template, redirect, url_for,
+                   request, current_app)
 from flask_login import current_user, login_user, logout_user
 from werkzeug.urls import url_parse
 
 from app import login_manager
+from app.common.mail import send_email
 from . import auth_bp
 from .forms import SignupForm, LoginForm
 from .models import User
-from app.common.mail import send_email
 
 
 @auth_bp.route("/signup/", methods=["GET", "POST"])
@@ -30,14 +37,15 @@ def show_signup_form():
             user = User(name=name, email=email)
             user.set_password(password)
             user.save()
-            # Dejamos al usuario logueado
-            login_user(user, remember=True)
-            next_page = request.args.get('next', None)
+            # Enviamos un email de bienvenida
             send_email(subject='Bienvenid@ al miniblog',
                        sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
                        recipients=[email, ],
                        text_body=f'Hola {name}, bienvenid@ al miniblog de Flask',
                        html_body=f'<p>Hola <strong>{name}</strong>, bienvenid@ al miniblog de Flask</p>')
+            # Dejamos al usuario logueado
+            login_user(user, remember=True)
+            next_page = request.args.get('next', None)
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('public.index')
             return redirect(next_page)

@@ -37,4 +37,4 @@ DONT_REPLY_FROM_EMAIL = 'dirección from'
 ADMINS = ('juanjo@j2logo.com', )
 MAIL_USE_TLS = True
 MAIL_DEBUG = False
-ITEMS_PER_PAGE = 3
+ITEMS_PER_PAGE = 11
